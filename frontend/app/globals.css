@@ -1,0 +1,188 @@
+@import 'tailwindcss';
+
+@layer utilities {
+  @font-face {
+    font-family: 'Neue Montreal';
+    src: url('/fonts/PPNeueMontreal-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 346 83% 56%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 346 83% 56%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 346 83% 56%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 346 83% 56%;
+  }
+
+  body {
+    /* @apply bg-background text-foreground; */
+    font-feature-settings: "ss01" 1, "ss02" 1, "ss03" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Improved typography spacing */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+  
+  h1 {
+    font-weight: 300;
+  }
+  
+  h2 {
+    font-weight: 400;
+  }
+  
+  h3 {
+    font-weight: 400;
+  }
+/* 
+  p,
+  li {
+    @apply leading-relaxed;
+  } */
+
+  /* Space Grotesk for numbers and metrics */
+  .font-mono,
+  .font-space {
+    font-feature-settings: "tnum" 1, "zero" 1;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Flat design overrides - remove borders and shadows */
+@layer components {
+  /* Remove all borders and shadows from common UI elements */
+  .no-border {
+    border: none !important;
+    box-shadow: none !important;
+  }
+  
+  /* Clean input styles */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="number"],
+  select,
+  textarea {
+    border: none !important;
+    box-shadow: none !important;
+    background-color: #f5f5f5;
+    border-radius: 12px;
+    padding: 12px 16px;
+    transition: background-color 0.2s ease;
+  }
+  
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus,
+  input[type="search"]:focus,
+  input[type="number"]:focus,
+  select:focus,
+  textarea:focus {
+    outline: none !important;
+    background-color: #e5e5e5;
+    box-shadow: none !important;
+    border: none !important;
+  }
+  
+  /* Clean button styles */
+  .btn-clean {
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  
+  .btn-primary {
+    background-color: #000;
+    color: #fff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #333;
+  }
+  
+  .btn-secondary {
+    background-color: #f5f5f5;
+    color: #000;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #e5e5e5;
+  }
+  
+  /* Remove all card borders and shadows */
+  .card-clean {
+    border: none !important;
+    box-shadow: none !important;
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 24px;
+  }
+  
+  /* Clean modal/dialog styles */
+  .modal-clean {
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 20px;
+    background-color: #fff;
+  }
+}
