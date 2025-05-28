@@ -20,7 +20,9 @@ export default function ManagerProperties() {
     if (currentUser) {
       // Get manager's properties
       const propertyIds = (mockManagedProperties as MockManagedProperties)[currentUser] || []
-      const managerProperties = properties.filter((prop) => propertyIds.includes(prop.id))
+      // Convert string IDs like "prop-001" to numbers like 1
+      const numericPropertyIds = propertyIds.map(id => parseInt(id.replace("prop-", "").replace(/^0+/, "")));
+      const managerProperties = properties.filter((prop) => numericPropertyIds.includes(prop.id))
       setManagedProperties(managerProperties)
     }
   }, [currentUser])
@@ -49,7 +51,7 @@ export default function ManagerProperties() {
             <Building className="h-12 w-12 text-warm-grey mx-auto mb-4" />
             <h2 className="font-neue font-semibold text-xl text-soft-black mb-2">No Properties Yet</h2>
             <p className="text-warm-grey mb-6 max-w-md mx-auto">
-              You haven't added any properties yet. Add your first property to start receiving applications.
+              You haven&apos;t added any properties yet. Add your first property to start receiving applications.
             </p>
             <Button asChild>
               <Link href="/managers/add-property">

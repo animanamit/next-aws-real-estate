@@ -1,29 +1,6 @@
-export interface Property {
-  id: number
-  title: string
-  description: string
-  price: number
-  bedrooms: number
-  bathrooms: number
-  squareFeet: number
-  propertyType: "Apartment" | "Villa" | "Townhouse" | "Cottage"
-  location: {
-    address: string
-    city: string
-    state: string
-    zip: string
-  }
-  availableFrom: string
-  amenities: string[]
-  images: string[]
-  isFeatured: boolean
-  propertyManager: {
-    name: string
-    phone: string
-    email: string
-    avatar: string
-  }
-}
+import type { Property } from "@/types"
+
+export type { Property }
 
 // Filter options for the sidebar
 export const amenitiesList = [
@@ -65,12 +42,28 @@ export const properties: Property[] = [
     bathrooms: 2,
     squareFeet: 1200,
     propertyType: "Apartment",
-    location: { address: "123 Downtown Ave", city: "Metropolis", state: "CA", zip: "90001" },
-    availableFrom: "2024-06-01",
+    photoUrls: ["/placeholder.jpg"],
     amenities: ["WiFi", "Parking", "Gym", "Pool", "Washer/Dryer", "Elevator", "Balcony", "Central AC"],
-    images: [],
-    isFeatured: true,
-    propertyManager: { name: "Alex Johnson", phone: "(555) 123-4567", email: "alex@rentease.com", avatar: "" },
+    highlights: ["City Views", "Newly Renovated", "Private Balcony"],
+    location: { 
+      address: "123 Downtown Ave", 
+      city: "Metropolis", 
+      state: "CA", 
+      country: "USA",
+      coordinates: {
+        lat: 34.0522,
+        lng: -118.2437,
+        latitude: 34.0522,
+        longitude: -118.2437
+      }
+    },
+    // Backend compatibility fields
+    name: "Modern Luxury Apartment with City Views",
+    pricePerMonth: 2500,
+    beds: 2,
+    baths: 2,
+    createdAt: "2024-01-01T00:00:00Z",
+    updatedAt: "2024-01-01T00:00:00Z"
   },
   {
     id: 2,
@@ -81,12 +74,27 @@ export const properties: Property[] = [
     bathrooms: 1,
     squareFeet: 950,
     propertyType: "Cottage",
-    location: { address: "456 Willow Lane", city: "Greenfield", state: "OR", zip: "97301" },
-    availableFrom: "2024-05-15",
+    photoUrls: ["/placeholder.jpg"],
     amenities: ["Parking", "Pets Allowed", "Washer/Dryer", "Fireplace", "Garden", "Patio"],
-    images: [],
-    isFeatured: false,
-    propertyManager: { name: "Sarah Miller", phone: "(555) 987-6543", email: "sarah@rentease.com", avatar: "" },
+    highlights: ["Private Garden", "Hardwood Floors", "Cozy Fireplace"],
+    location: { 
+      address: "456 Willow Lane", 
+      city: "Greenfield", 
+      state: "OR", 
+      country: "USA",
+      coordinates: {
+        lat: 45.3311,
+        lng: -122.9015,
+        latitude: 45.3311,
+        longitude: -122.9015
+      }
+    },
+    name: "Charming Cottage with Private Garden",
+    pricePerMonth: 1800,
+    beds: 2,
+    baths: 1,
+    createdAt: "2024-01-01T00:00:00Z",
+    updatedAt: "2024-01-01T00:00:00Z"
   },
   {
     id: 3,
@@ -97,12 +105,27 @@ export const properties: Property[] = [
     bathrooms: 2.5,
     squareFeet: 1800,
     propertyType: "Townhouse",
-    location: { address: "789 Oak Street", city: "Riverside", state: "TX", zip: "75001" },
-    availableFrom: "2024-07-01",
+    photoUrls: ["/placeholder.jpg"],
     amenities: ["WiFi", "Parking", "Washer/Dryer", "Garage", "Patio", "Central AC", "Dishwasher"],
-    images: [],
-    isFeatured: true,
-    propertyManager: { name: "Michael Chen", phone: "(555) 456-7890", email: "michael@rentease.com", avatar: "" },
+    highlights: ["Three Levels", "Gourmet Kitchen", "Garage Included"],
+    location: { 
+      address: "789 Oak Street", 
+      city: "Riverside", 
+      state: "TX", 
+      country: "USA",
+      coordinates: {
+        lat: 32.7767,
+        lng: -96.7970,
+        latitude: 32.7767,
+        longitude: -96.7970
+      }
+    },
+    name: "Spacious Townhouse with Garage",
+    pricePerMonth: 2200,
+    beds: 3,
+    baths: 2.5,
+    createdAt: "2024-01-01T00:00:00Z",
+    updatedAt: "2024-01-01T00:00:00Z"
   },
   {
     id: 4,
@@ -113,12 +136,27 @@ export const properties: Property[] = [
     bathrooms: 3,
     squareFeet: 2500,
     propertyType: "Villa",
-    location: { address: "321 Palm Drive", city: "Sunset Hills", state: "FL", zip: "33101" },
-    availableFrom: "2024-08-01",
+    photoUrls: ["/placeholder.jpg"],
     amenities: ["WiFi", "Parking", "Pool", "Gym", "Washer/Dryer", "Garden", "Patio", "Central AC", "Fireplace"],
-    images: [],
-    isFeatured: true,
-    propertyManager: { name: "Emma Rodriguez", phone: "(555) 234-5678", email: "emma@rentease.com", avatar: "" },
+    highlights: ["Private Pool", "Luxury Finishes", "Outdoor Entertainment"],
+    location: { 
+      address: "321 Palm Drive", 
+      city: "Sunset Hills", 
+      state: "FL", 
+      country: "USA",
+      coordinates: {
+        lat: 25.7617,
+        lng: -80.1918,
+        latitude: 25.7617,
+        longitude: -80.1918
+      }
+    },
+    name: "Elegant Villa with Pool",
+    pricePerMonth: 3500,
+    beds: 4,
+    baths: 3,
+    createdAt: "2024-01-01T00:00:00Z",
+    updatedAt: "2024-01-01T00:00:00Z"
   },
   {
     id: 5,
@@ -134,7 +172,6 @@ export const properties: Property[] = [
     amenities: ["WiFi", "Elevator", "Central AC", "Washer/Dryer"],
     images: [],
     isFeatured: false,
-    propertyManager: { name: "David Kim", phone: "(555) 876-5432", email: "david@rentease.com", avatar: "" },
   },
   {
     id: 6,
@@ -150,7 +187,6 @@ export const properties: Property[] = [
     amenities: ["WiFi", "Parking", "Washer/Dryer", "Garden", "Patio", "Pets Allowed", "Central AC"],
     images: [],
     isFeatured: false,
-    propertyManager: { name: "Lisa Thompson", phone: "(555) 345-6789", email: "lisa@rentease.com", avatar: "" },
   },
   {
     id: 7,
@@ -166,7 +202,6 @@ export const properties: Property[] = [
     amenities: ["WiFi", "Parking", "Elevator", "Hardwood Floors", "High Speed Internet"],
     images: [],
     isFeatured: false,
-    propertyManager: { name: "Jennifer Walsh", phone: "(555) 111-2222", email: "jen@rentease.com", avatar: "" },
   },
   {
     id: 8,
@@ -182,7 +217,6 @@ export const properties: Property[] = [
     amenities: ["WiFi", "Pool", "Gym", "Balcony", "Parking", "Elevator", "Central AC"],
     images: [],
     isFeatured: true,
-    propertyManager: { name: "Carlos Rodriguez", phone: "(555) 333-4444", email: "carlos@rentease.com", avatar: "" },
   },
   {
     id: 9,
@@ -198,7 +232,6 @@ export const properties: Property[] = [
     amenities: ["WiFi", "Parking", "Hardwood Floors", "Fireplace", "Walk-in Closets"],
     images: [],
     isFeatured: false,
-    propertyManager: { name: "Margaret O'Brien", phone: "(555) 555-6666", email: "margaret@rentease.com", avatar: "" },
   },
   {
     id: 10,
@@ -214,7 +247,6 @@ export const properties: Property[] = [
     amenities: ["WiFi", "Parking", "Fireplace", "Patio", "Garden"],
     images: [],
     isFeatured: false,
-    propertyManager: { name: "Tom Wilson", phone: "(555) 777-8888", email: "tom@rentease.com", avatar: "" },
   },
   {
     id: 11,
@@ -230,7 +262,6 @@ export const properties: Property[] = [
     amenities: ["WiFi", "Pool", "Gym", "Elevator", "Balcony", "Central AC", "Garage"],
     images: [],
     isFeatured: true,
-    propertyManager: { name: "Robert Kim", phone: "(555) 999-0000", email: "robert@rentease.com", avatar: "" },
   },
   {
     id: 12,
@@ -246,7 +277,6 @@ export const properties: Property[] = [
     amenities: ["WiFi", "Parking", "Garden", "Patio", "Garage", "Central AC"],
     images: [],
     isFeatured: false,
-    propertyManager: { name: "Linda Garcia", phone: "(555) 123-9876", email: "linda@rentease.com", avatar: "" },
   },
   {
     id: 13,
@@ -262,7 +292,6 @@ export const properties: Property[] = [
     amenities: ["WiFi", "Parking", "Balcony", "Patio", "Central AC"],
     images: [],
     isFeatured: true,
-    propertyManager: { name: "Maria Santos", phone: "(555) 456-1234", email: "maria@rentease.com", avatar: "" },
   },
   {
     id: 14,
@@ -278,7 +307,6 @@ export const properties: Property[] = [
     amenities: ["WiFi", "Gym", "Pool", "Elevator", "Central AC"],
     images: [],
     isFeatured: false,
-    propertyManager: { name: "Kevin Chang", phone: "(555) 789-4561", email: "kevin@rentease.com", avatar: "" },
   },
   {
     id: 15,
@@ -294,7 +322,6 @@ export const properties: Property[] = [
     amenities: ["WiFi", "Parking", "Patio", "Garden", "Pets Allowed", "Hardwood Floors"],
     images: [],
     isFeatured: false,
-    propertyManager: { name: "Amy Johnson", phone: "(555) 321-6547", email: "amy@rentease.com", avatar: "" },
   },
   {
     id: 16,
@@ -310,7 +337,6 @@ export const properties: Property[] = [
     amenities: ["WiFi", "Pool", "Garage", "Patio", "Central AC", "Walk-in Closets"],
     images: [],
     isFeatured: true,
-    propertyManager: { name: "Daniel Brown", phone: "(555) 654-9871", email: "daniel@rentease.com", avatar: "" },
   },
   {
     id: 17,
@@ -326,7 +352,6 @@ export const properties: Property[] = [
     amenities: ["WiFi", "Parking", "High Speed Internet", "Hardwood Floors"],
     images: [],
     isFeatured: false,
-    propertyManager: { name: "Sofia Martinez", phone: "(555) 987-3210", email: "sofia@rentease.com", avatar: "" },
   },
   {
     id: 18,
@@ -342,7 +367,6 @@ export const properties: Property[] = [
     amenities: ["WiFi", "Parking", "Fireplace", "Patio", "Garden"],
     images: [],
     isFeatured: true,
-    propertyManager: { name: "Jason Lee", phone: "(555) 147-2583", email: "jason@rentease.com", avatar: "" },
   },
   {
     id: 19,
@@ -358,7 +382,6 @@ export const properties: Property[] = [
     amenities: ["WiFi", "Pool", "Gym", "Elevator", "Balcony", "Central AC"],
     images: [],
     isFeatured: true,
-    propertyManager: { name: "Isabella Rodriguez", phone: "(555) 369-8520", email: "isabella@rentease.com", avatar: "" },
   },
   {
     id: 20,
@@ -374,7 +397,6 @@ export const properties: Property[] = [
     amenities: ["WiFi", "Parking", "Washer/Dryer", "Garden", "Pets Allowed"],
     images: [],
     isFeatured: false,
-    propertyManager: { name: "Ryan Taylor", phone: "(555) 741-9630", email: "ryan@rentease.com", avatar: "" },
   },
   {
     id: 21,
@@ -390,7 +412,6 @@ export const properties: Property[] = [
     amenities: ["WiFi", "Pool", "Garage", "Patio", "Garden", "Central AC", "Fireplace"],
     images: [],
     isFeatured: true,
-    propertyManager: { name: "Victoria White", phone: "(555) 852-7410", email: "victoria@rentease.com", avatar: "" },
   },
   {
     id: 22,
@@ -406,7 +427,6 @@ export const properties: Property[] = [
     amenities: ["WiFi", "Parking", "Washer/Dryer", "Central AC"],
     images: [],
     isFeatured: false,
-    propertyManager: { name: "Peter Davis", phone: "(555) 963-1470", email: "peter@rentease.com", avatar: "" },
   },
   {
     id: 23,
@@ -422,7 +442,6 @@ export const properties: Property[] = [
     amenities: ["WiFi", "Parking", "Garden", "Hardwood Floors", "Fireplace"],
     images: [],
     isFeatured: false,
-    propertyManager: { name: "Grace Wilson", phone: "(555) 159-7530", email: "grace@rentease.com", avatar: "" },
   },
   {
     id: 24,
@@ -438,7 +457,6 @@ export const properties: Property[] = [
     amenities: ["WiFi", "Parking", "Garden", "Patio", "Garage", "Central AC"],
     images: [],
     isFeatured: true,
-    propertyManager: { name: "Nathan Green", phone: "(555) 357-9514", email: "nathan@rentease.com", avatar: "" },
   },
   {
     id: 25,
@@ -454,7 +472,6 @@ export const properties: Property[] = [
     amenities: ["WiFi", "Parking", "Balcony", "Central AC", "Washer/Dryer"],
     images: [],
     isFeatured: false,
-    propertyManager: { name: "Rachel Adams", phone: "(555) 753-8520", email: "rachel@rentease.com", avatar: "" },
   },
   {
     id: 26,
@@ -470,7 +487,6 @@ export const properties: Property[] = [
     amenities: ["WiFi", "Parking", "Fireplace", "Patio", "Garden"],
     images: [],
     isFeatured: false,
-    propertyManager: { name: "Mark Thompson", phone: "(555) 951-7532", email: "mark@rentease.com", avatar: "" },
   },
   {
     id: 27,
@@ -486,7 +502,6 @@ export const properties: Property[] = [
     amenities: ["WiFi", "Pool", "Garage", "Patio", "Central AC"],
     images: [],
     isFeatured: true,
-    propertyManager: { name: "Steven Clark", phone: "(555) 357-1590", email: "steven@rentease.com", avatar: "" },
   },
   {
     id: 28,
@@ -502,7 +517,6 @@ export const properties: Property[] = [
     amenities: ["WiFi", "Parking", "Balcony", "Hardwood Floors", "High Speed Internet"],
     images: [],
     isFeatured: false,
-    propertyManager: { name: "Emily Baker", phone: "(555) 159-3570", email: "emily@rentease.com", avatar: "" },
   },
   {
     id: 29,
@@ -518,7 +532,6 @@ export const properties: Property[] = [
     amenities: ["WiFi", "Parking", "Patio", "Garden", "Central AC"],
     images: [],
     isFeatured: true,
-    propertyManager: { name: "Christopher Hall", phone: "(555) 753-9514", email: "chris@rentease.com", avatar: "" },
   },
   {
     id: 30,
@@ -534,6 +547,5 @@ export const properties: Property[] = [
     amenities: ["WiFi", "Pool", "Gym", "Elevator", "Balcony", "Central AC", "Garage"],
     images: [],
     isFeatured: true,
-    propertyManager: { name: "Amanda Lewis", phone: "(555) 951-3570", email: "amanda@rentease.com", avatar: "" },
   },
 ]

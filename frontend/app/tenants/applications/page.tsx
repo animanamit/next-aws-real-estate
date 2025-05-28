@@ -47,7 +47,7 @@ export default function TenantApplications() {
             <FileText className="h-12 w-12 text-warm-grey mx-auto mb-4" />
             <h2 className="font-neue font-semibold text-xl text-soft-black mb-2">No Applications Yet</h2>
             <p className="text-warm-grey mb-6 max-w-md mx-auto">
-              You haven't submitted any applications yet. Browse properties and apply to find your next home.
+              You haven&apos;t submitted any applications yet. Browse properties and apply to find your next home.
             </p>
             <Button asChild>
               <Link href="/search">

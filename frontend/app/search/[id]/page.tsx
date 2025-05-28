@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useParams } from "next/navigation"
-import { MapPin, Bed, Bath, Square, Calendar, DollarSign, Star, Heart, Share2, TrendingUp } from "lucide-react"
+import { MapPin, Bed, Bath, Square, Calendar, Star, Heart, Share2 } from "lucide-react"
 import NavigationHeader from "@/components/navigation-header"
 import Footer from "@/components/footer"
 import ImageGallery from "@/components/image-gallery"
@@ -44,7 +44,7 @@ export default function PropertyDetailPage() {
         <main className="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-8 flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-2xl font-medium text-gray-900 mb-4">Property Not Found</h1>
-            <p className="text-gray-600 mb-6">The property you're looking for doesn't exist.</p>
+            <p className="text-gray-600 mb-6">The property you&apos;re looking for doesn&apos;t exist.</p>
             <a
               href="/search"
               className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
@@ -114,9 +114,6 @@ export default function PropertyDetailPage() {
                   <span className="font-medium text-gray-900">4.8</span>
                   <span className="text-sm text-gray-500">(24 reviews)</span>
                 </div>
-                {property.isFeatured && (
-                  <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded">Featured</span>
-                )}
               </div>
             </div>
           </div>
@@ -163,7 +160,7 @@ export default function PropertyDetailPage() {
               <div className="bg-white rounded-xl p-6">
                 <h2 className="text-lg font-medium text-gray-900 mb-4">Amenities</h2>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                  {property.amenities.map((amenity) => (
+                  {property.amenities.map((amenity: string) => (
                     <div key={amenity} className="flex items-center space-x-2 py-2">
                       <div className="w-2 h-2 bg-green-500 rounded-full" />
                       <span className="text-sm text-gray-700">{amenity}</span>

@@ -9,7 +9,7 @@ import {
 } from "@/lib/mock-users";
 import { properties } from "@/lib/mock-data";
 import type { MockManagedProperties } from "@/types";
-import { Building, FileText, Plus, Users, DollarSign, TrendingUp, Clock, CheckCircle, Calendar } from "lucide-react";
+import { Building, FileText, DollarSign, TrendingUp, Clock } from "lucide-react";
 import Link from "next/link";
 
 export default function ManagerDashboard() {
@@ -19,8 +19,10 @@ export default function ManagerDashboard() {
 
   // Get manager's properties
   const propertyIds = (mockManagedProperties as MockManagedProperties)[currentUser] || [];
+  // Convert string IDs like "prop-001" to numbers like 1
+  const numericPropertyIds = propertyIds.map(id => parseInt(id.replace("prop-", "").replace(/^0+/, "")));
   const managedProperties = properties.filter((prop) =>
-    propertyIds.includes(prop.id)
+    numericPropertyIds.includes(prop.id)
   );
 
   // Get applications for manager's properties

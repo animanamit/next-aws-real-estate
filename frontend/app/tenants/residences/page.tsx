@@ -4,8 +4,7 @@ import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import type { RootState } from "@/lib/store"
 import DashboardLayout from "@/components/dashboard-layout"
-import { mockResidences } from "@/lib/mock-users"
-import type { Residence } from "@/types"
+import { mockResidences, type Residence } from "@/lib/mock-users"
 import { Building, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
@@ -47,7 +46,7 @@ export default function TenantResidences() {
             <Building className="h-12 w-12 text-warm-grey mx-auto mb-4" />
             <h2 className="font-neue font-semibold text-xl text-soft-black mb-2">No Current Residences</h2>
             <p className="text-warm-grey mb-6 max-w-md mx-auto">
-              You don't have any active leases at the moment. Browse properties and submit applications to find your
+              You don&apos;t have any active leases at the moment. Browse properties and submit applications to find your
               next home.
             </p>
             <Button asChild>

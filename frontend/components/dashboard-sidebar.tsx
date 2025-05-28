@@ -1,16 +1,17 @@
 "use client"
 
 import { usePathname, useRouter } from "next/navigation"
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarRail,
-} from "@/components/ui/sidebar"
+// Sidebar components not used in current implementation
+// import {
+//   Sidebar,
+//   SidebarContent,
+//   SidebarFooter,
+//   SidebarHeader,
+//   SidebarMenu,
+//   SidebarMenuButton,
+//   SidebarMenuItem,
+//   SidebarRail,
+// } from "@/components/ui/sidebar"
 import { Home, Heart, FileText, Settings, LogOut, Building, Plus, Users, User, BarChart3 } from "lucide-react"
 import Link from "next/link"
 import type { User as UserType } from "@/lib/mock-users"

@@ -21,13 +21,16 @@ export default function TenantFavorites() {
     if (currentUser) {
       // Get tenant's favorites
       const userFavorites = (mockFavorites as MockFavorites)[currentUser] || []
-      const favoriteProperties = properties.filter((prop) => userFavorites.includes(prop.id))
+      // Convert string IDs like "prop-001" to numbers like 1
+      const numericFavoriteIds = userFavorites.map(id => parseInt(id.replace("prop-", "").replace(/^0+/, "")));
+      const favoriteProperties = properties.filter((prop) => numericFavoriteIds.includes(prop.id))
       setFavorites(favoriteProperties)
     }
   }, [currentUser])
 
-  const handleRemoveFavorite = (propertyId: string) => {
-    dispatch(removeFavorite(propertyId))
+  const handleRemoveFavorite = (propertyId: number) => {
+    const propertyStringId = `prop-${propertyId.toString().padStart(3, '0')}`;
+    dispatch(removeFavorite(propertyStringId))
     setFavorites(favorites.filter((property) => property.id !== propertyId))
   }
 
@@ -64,7 +67,7 @@ export default function TenantFavorites() {
             <Heart className="h-12 w-12 text-warm-grey mx-auto mb-4" />
             <h2 className="font-neue font-semibold text-xl text-soft-black mb-2">No Favorites Yet</h2>
             <p className="text-warm-grey mb-6 max-w-md mx-auto">
-              You haven't saved any properties to your favorites yet. Browse properties and click the heart icon to save
+              You haven&apos;t saved any properties to your favorites yet. Browse properties and click the heart icon to save
               them here.
             </p>
             <Button asChild>

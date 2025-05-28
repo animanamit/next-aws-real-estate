@@ -6,7 +6,7 @@ import { Filter, Grid, List, MapPin, ChevronLeft, ChevronRight } from "lucide-re
 import PropertyCard from "@/components/property-card"
 import FilterSidebar from "@/components/filter-sidebar"
 import { LocationSearch } from "@/components/location-search"
-import { properties } from "@/lib/mock-data"
+// import { properties } from "@/lib/mock-data"
 import NavigationHeader from "@/components/navigation-header"
 import Footer from "@/components/footer"
 import { useFindPropertiesNearPointMutation, useGetPropertiesQuery } from "@/state/api"
@@ -27,7 +27,7 @@ export default function SearchPage() {
   const {
     data: propertiesData,
     isLoading: isLoadingProperties,
-    isError: isPropertiesError
+    // isError: isPropertiesError // Unused variable
   } = useGetPropertiesQuery(
     { ...filters, page: currentPage, limit: resultsPerPage },
     { skip: isLocationSearch }

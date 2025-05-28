@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { mockApplications, mockResidences, mockFavorites, mockUsers } from "@/lib/mock-users";
 import { properties } from "@/lib/mock-data";
 import type { MockFavorites } from "@/types";
-import { Building, FileText, Heart, Search, Clock, CheckCircle, XCircle, Calendar, DollarSign, MapPin } from "lucide-react";
+import { Building, FileText, Heart, Clock, DollarSign } from "lucide-react";
 import Link from "next/link";
 
 export default function TenantDashboard() {
@@ -14,12 +14,14 @@ export default function TenantDashboard() {
   // Get tenant's applications (expanded data)
   const applications = mockApplications.filter((app) => app.tenantId === currentUser);
 
-  // Get tenant's residences
-  const residences = mockResidences.filter((res) => res.tenantId === currentUser);
+  // Get tenant's residences (commented out as not used in current UI)
+  // const residences = mockResidences.filter((res) => res.tenantId === currentUser);
 
   // Get tenant's favorites (expanded)
   const userFavorites = (mockFavorites as MockFavorites)[currentUser] || [];
-  const favorites = properties.filter((prop) => userFavorites.includes(prop.id));
+  // Convert string IDs like "prop-001" to numbers like 1
+  const numericFavoriteIds = userFavorites.map(id => parseInt(id.replace("prop-", "").replace(/^0+/, "")));
+  const favorites = properties.filter((prop) => numericFavoriteIds.includes(prop.id));
 
   // Mock recent activity
   const recentActivity = [

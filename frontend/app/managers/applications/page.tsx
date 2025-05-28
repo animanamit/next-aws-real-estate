@@ -64,7 +64,7 @@ export default function ManagerApplications() {
             <FileText className="h-12 w-12 text-warm-grey mx-auto mb-4" />
             <h2 className="font-neue font-semibold text-xl text-soft-black mb-2">No Applications Yet</h2>
             <p className="text-warm-grey mb-6 max-w-md mx-auto">
-              You haven't received any applications for your properties yet.
+              You haven&apos;t received any applications for your properties yet.
             </p>
           </div>
         )}
