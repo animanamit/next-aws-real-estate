@@ -3,6 +3,7 @@ import DashboardLayout from "@/components/dashboard-layout";
 import { Button } from "@/components/ui/button";
 import { mockApplications, mockResidences, mockFavorites, mockUsers } from "@/lib/mock-users";
 import { properties } from "@/lib/mock-data";
+import type { MockFavorites } from "@/types";
 import { Building, FileText, Heart, Search, Clock, CheckCircle, XCircle, Calendar, DollarSign, MapPin } from "lucide-react";
 import Link from "next/link";
 
@@ -17,7 +18,7 @@ export default function TenantDashboard() {
   const residences = mockResidences.filter((res) => res.tenantId === currentUser);
 
   // Get tenant's favorites (expanded)
-  const userFavorites = mockFavorites[currentUser] || [];
+  const userFavorites = (mockFavorites as MockFavorites)[currentUser] || [];
   const favorites = properties.filter((prop) => userFavorites.includes(prop.id));
 
   // Mock recent activity
@@ -97,7 +98,7 @@ export default function TenantDashboard() {
                         }`} />
                         <div>
                           <div className="text-sm font-medium text-gray-900">{app.propertyTitle}</div>
-                          <div className="text-xs text-gray-500">{app.submittedAt}</div>
+                          <div className="text-xs text-gray-500">{app.appliedAt}</div>
                         </div>
                       </div>
                       <div className="text-right">

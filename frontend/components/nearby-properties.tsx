@@ -90,25 +90,26 @@ export const NearbyProperties: React.FC<NearbyPropertiesProps> = ({
           // Format property data to match expected structure
           const formattedProperty = {
             id: property.id,
-            name: property.name,
-            pricePerMonth: property.pricePerMonth,
-            beds: property.beds,
-            baths: property.baths,
-            squareFeet: property.squareFeet,
-            propertyType: property.propertyType,
+            title: property.name || "Property",
+            description: property.description || "Beautiful property",
+            price: property.pricePerMonth || 0,
+            bedrooms: property.beds || 0,
+            bathrooms: property.baths || 0,
+            squareFeet: property.squareFeet || 0,
+            propertyType: property.propertyType || "apartment",
             photoUrls: property.photoUrls || [],
-            location: {
-              address: property.address,
-              city: property.city,
-              state: property.state,
-              country: property.country,
-              coordinates: {
-                lat: property.lat,
-                lng: property.lng
-              }
-            },
             amenities: property.amenities || [],
             highlights: property.highlights || [],
+            location: {
+              address: property.address || "",
+              city: property.city || "",
+              state: property.state || "",
+              country: property.country || "USA",
+              coordinates: {
+                lat: property.lat || 0,
+                lng: property.lng || 0
+              }
+            },
             distance: property.distance_meters ? Math.round(property.distance_meters / 1000 * 10) / 10 : null
           };
 

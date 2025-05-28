@@ -5,18 +5,24 @@ export const mockManagers: Manager[] = [
   {
     id: 1,
     cognitoId: "manager123",
+    firstName: "Sarah",
+    lastName: "Johnson",
     name: "Sarah Johnson",
     email: "sarah.johnson@realtyco.com",
     phoneNumber: "(555) 123-4567",
-    managedProperties: []
+    createdAt: "2024-01-01T00:00:00Z",
+    updatedAt: "2024-01-01T00:00:00Z"
   },
   {
     id: 2,
     cognitoId: "manager456",
+    firstName: "Michael",
+    lastName: "Chen",
     name: "Michael Chen",
     email: "michael.chen@premiumproperties.com",
     phoneNumber: "(555) 987-6543",
-    managedProperties: []
+    createdAt: "2024-01-01T00:00:00Z",
+    updatedAt: "2024-01-01T00:00:00Z"
   }
 ];
 
@@ -25,24 +31,24 @@ export const mockTenants: Tenant[] = [
   {
     id: 1,
     cognitoId: "tenant123",
+    firstName: "Alex",
+    lastName: "Rivera",
     name: "Alex Rivera",
     email: "alex.rivera@email.com",
     phoneNumber: "(555) 234-5678",
-    properties: [],
-    favorites: [],
-    applications: [],
-    leases: []
+    createdAt: "2024-01-01T00:00:00Z",
+    updatedAt: "2024-01-01T00:00:00Z"
   },
   {
     id: 2,
     cognitoId: "tenant456",
+    firstName: "Emma",
+    lastName: "Thompson",
     name: "Emma Thompson",
     email: "emma.thompson@email.com",
     phoneNumber: "(555) 345-6789",
-    properties: [],
-    favorites: [],
-    applications: [],
-    leases: []
+    createdAt: "2024-01-01T00:00:00Z",
+    updatedAt: "2024-01-01T00:00:00Z"
   }
 ];
 
@@ -80,7 +86,7 @@ export const mockProperties: Property[] = [
       state: "CA",
       country: "USA",
       postalCode: "94102",
-      coordinates: { longitude: -122.4194, latitude: 37.7749 }
+      coordinates: { lat: 37.7749, lng: -122.4194, latitude: 37.7749, longitude: -122.4194 }
     },
     manager: mockManagers[0],
     leases: [],
@@ -119,7 +125,7 @@ export const mockProperties: Property[] = [
       state: "CA", 
       country: "USA",
       postalCode: "94117",
-      coordinates: { longitude: -122.4477, latitude: 37.7697 }
+      coordinates: { lat: 37.7697, lng: -122.4477, latitude: 37.7697, longitude: -122.4477 }
     },
     manager: mockManagers[0],
     leases: [],
@@ -157,7 +163,7 @@ export const mockProperties: Property[] = [
       state: "CA",
       country: "USA", 
       postalCode: "94111",
-      coordinates: { longitude: -122.3962, latitude: 37.7928 }
+      coordinates: { lat: 37.7928, lng: -122.3962, latitude: 37.7928, longitude: -122.3962 }
     },
     manager: mockManagers[1],
     leases: [],
@@ -198,7 +204,7 @@ export const mockProperties: Property[] = [
       state: "CA",
       country: "USA",
       postalCode: "94122", 
-      coordinates: { longitude: -122.4683, latitude: 37.7596 }
+      coordinates: { lat: 37.7596, lng: -122.4683, latitude: 37.7596, longitude: -122.4683 }
     },
     manager: mockManagers[1],
     leases: [],
@@ -236,7 +242,7 @@ export const mockProperties: Property[] = [
       state: "CA",
       country: "USA",
       postalCode: "94132",
-      coordinates: { longitude: -122.4821, latitude: 37.7172 }
+      coordinates: { lat: 37.7172, lng: -122.4821, latitude: 37.7172, longitude: -122.4821 }
     },
     manager: mockManagers[0],
     leases: [],
@@ -276,7 +282,7 @@ export const mockProperties: Property[] = [
       state: "CA",
       country: "USA",
       postalCode: "94124",
-      coordinates: { longitude: -122.3735, latitude: 37.7335 }
+      coordinates: { lat: 37.7335, lng: -122.3735, latitude: 37.7335, longitude: -122.3735 }
     },
     manager: mockManagers[1],
     leases: [],
@@ -289,49 +295,46 @@ export const mockProperties: Property[] = [
 // Mock Applications
 export const mockApplications: Application[] = [
   {
-    id: 1,
-    applicationDate: "2024-01-28T10:00:00Z",
-    status: "Pending",
-    propertyId: 1,
-    tenantCognitoId: "tenant123",
-    name: "Alex Rivera",
-    email: "alex.rivera@email.com",
-    phoneNumber: "(555) 234-5678",
-    message: "Very interested in this property. I work remotely and would love the downtown location.",
-    leaseId: null,
-    property: mockProperties[0],
-    tenant: mockTenants[0],
-    lease: null
+    id: "1",
+    propertyTitle: "Luxury Downtown Loft",
+    propertyImage: "/placeholder.jpg",
+    tenantId: "tenant123",
+    tenantName: "Alex Rivera",
+    tenantEmail: "alex.rivera@email.com",
+    tenantPhone: "(555) 234-5678",
+    appliedAt: "2024-01-28T10:00:00Z",
+    updatedAt: "2024-01-28T10:00:00Z",
+    status: "pending",
+    propertyId: "1",
+    message: "Very interested in this property. I work remotely and would love the downtown location."
   },
   {
-    id: 2,
-    applicationDate: "2024-01-26T14:30:00Z",
-    status: "Approved",
-    propertyId: 2,
-    tenantCognitoId: "tenant456",
-    name: "Emma Thompson",
-    email: "emma.thompson@email.com",
-    phoneNumber: "(555) 345-6789",
-    message: "Looking for a long-term rental. I have excellent references and stable income.",
-    leaseId: 1,
-    property: mockProperties[1],
-    tenant: mockTenants[1],
-    lease: null
+    id: "2",
+    propertyTitle: "Modern 2BR Apartment",
+    propertyImage: "/placeholder.jpg",
+    tenantId: "tenant456",
+    tenantName: "Emma Thompson",
+    tenantEmail: "emma.thompson@email.com",
+    tenantPhone: "(555) 345-6789",
+    appliedAt: "2024-01-26T14:30:00Z",
+    updatedAt: "2024-01-26T14:30:00Z",
+    status: "approved",
+    propertyId: "2",
+    message: "Looking for a long-term rental. I have excellent references and stable income."
   },
   {
-    id: 3,
-    applicationDate: "2024-01-24T09:15:00Z",
-    status: "Denied",
-    propertyId: 3,
-    tenantCognitoId: "tenant123",
-    name: "Alex Rivera",
-    email: "alex.rivera@email.com",
-    phoneNumber: "(555) 234-5678",
-    message: "Interested in the studio for immediate move-in.",
-    leaseId: null,
-    property: mockProperties[2],
-    tenant: mockTenants[0],
-    lease: null
+    id: "3",
+    propertyTitle: "Cozy Studio",
+    propertyImage: "/placeholder.jpg",
+    tenantId: "tenant123",
+    tenantName: "Alex Rivera",
+    tenantEmail: "alex.rivera@email.com",
+    tenantPhone: "(555) 234-5678",
+    appliedAt: "2024-01-24T09:15:00Z",
+    updatedAt: "2024-01-24T09:15:00Z",
+    status: "denied",
+    propertyId: "3",
+    message: "Interested in the studio for immediate move-in."
   }
 ];
 
@@ -339,16 +342,16 @@ export const mockApplications: Application[] = [
 export const mockLeases: Lease[] = [
   {
     id: 1,
-    startDate: "2024-02-01T00:00:00Z",
-    endDate: "2025-01-31T23:59:59Z",
-    rent: 4500,
-    deposit: 4500,
     propertyId: 2,
     tenantCognitoId: "tenant456",
-    property: mockProperties[1],
-    tenant: mockTenants[1],
-    application: mockApplications[1],
-    payments: []
+    startDate: "2024-02-01T00:00:00Z",
+    endDate: "2025-01-31T23:59:59Z",
+    monthlyRent: 4500,
+    securityDeposit: 4500,
+    leaseTerm: 12,
+    status: "active",
+    createdAt: "2024-01-26T00:00:00Z",
+    updatedAt: "2024-01-26T00:00:00Z"
   }
 ];
 
@@ -356,23 +359,26 @@ export const mockLeases: Lease[] = [
 export const mockPayments: Payment[] = [
   {
     id: 1,
-    amountDue: 4500,
-    amountPaid: 4500,
-    dueDate: "2024-02-01T00:00:00Z",
-    paymentDate: "2024-01-30T10:30:00Z",
-    paymentStatus: "Paid",
     leaseId: 1,
-    lease: mockLeases[0]
+    amount: 4500,
+    paymentType: "rent",
+    paymentMethod: "bank_transfer",
+    status: "completed",
+    dueDate: "2024-02-01T00:00:00Z",
+    paidDate: "2024-01-30T10:30:00Z",
+    createdAt: "2024-01-26T00:00:00Z",
+    updatedAt: "2024-01-30T10:30:00Z"
   },
   {
     id: 2,
-    amountDue: 4500,
-    amountPaid: 0,
-    dueDate: "2024-03-01T00:00:00Z",
-    paymentDate: "2024-03-01T00:00:00Z",
-    paymentStatus: "Pending",
     leaseId: 1,
-    lease: mockLeases[0]
+    amount: 4500,
+    paymentType: "rent",
+    paymentMethod: "bank_transfer",
+    status: "pending",
+    dueDate: "2024-03-01T00:00:00Z",
+    createdAt: "2024-02-01T00:00:00Z",
+    updatedAt: "2024-02-01T00:00:00Z"
   }
 ];
 

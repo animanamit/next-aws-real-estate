@@ -1,7 +1,7 @@
 import { configureStore, createSlice, type PayloadAction } from "@reduxjs/toolkit"
 import { setupListeners } from "@reduxjs/toolkit/query"
 import { mockUsers, mockFavorites } from "./mock-users"
-import type { User } from "./user" // Declare the User variable
+import type { User, MockFavorites } from "@/types"
 import { api } from "@/state/api"
 import globalReducer from "@/state/index"
 
@@ -114,7 +114,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: [api.util.getRunningQueriesThunk.type],
+        ignoredActions: ["api/executeQuery/pending", "api/executeMutation/pending"],
       },
     }).concat(api.middleware),
 })
@@ -145,8 +145,8 @@ export const mockLogin = (email: string, password: string) => {
         dispatch(loginSuccess(user.id))
 
         // Load user favorites if tenant
-        if (user.role === "tenant" && mockFavorites[user.id]) {
-          dispatch(setFavorites(mockFavorites[user.id]))
+        if (user.role === "tenant" && (mockFavorites as MockFavorites)[user.id]) {
+          dispatch(setFavorites((mockFavorites as MockFavorites)[user.id]))
         }
 
         return user

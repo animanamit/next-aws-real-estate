@@ -231,18 +231,16 @@ export const api = createApi({
     }),
 
     getProperty: build.query<Property, number>({
-      queryFn: async (id) => {
-        if (USE_MOCK_DATA) {
-          const result = await mockApi.getProperty(id);
-          return { data: result };
-        }
-        
-        // Real API call
+      query: (id) => {
         console.log(`🏠 Fetching property details for ID:`, id);
-        return { url: `api/properties/${id}` };
+        return `api/properties/${id}`;
       },
       providesTags: (result, error, id) => [{ type: "PropertyDetails", id }],
       async onQueryStarted(_, { queryFulfilled }) {
+        if (USE_MOCK_DATA) {
+          // For mock mode, we'll handle this differently
+          return;
+        }
         await withToast(queryFulfilled, {
           error: "Failed to load property details.",
         });
@@ -251,18 +249,15 @@ export const api = createApi({
 
     // Tenant endpoints
     getTenant: build.query<Tenant, string>({
-      queryFn: async (cognitoId) => {
-        if (USE_MOCK_DATA) {
-          const result = await mockApi.getTenant(cognitoId);
-          return { data: result };
-        }
-        
-        // Real API call
+      query: (cognitoId) => {
         console.log(`👤 Fetching tenant data for:`, cognitoId);
-        return { url: `api/tenants/${cognitoId}` };
+        return `api/tenants/${cognitoId}`;
       },
       providesTags: (result) => [{ type: "Tenants", id: result?.id }],
       async onQueryStarted(_, { queryFulfilled }) {
+        if (USE_MOCK_DATA) {
+          return;
+        }
         await withToast(queryFulfilled, {
           error: "Failed to load tenant profile.",
         });
@@ -270,7 +265,7 @@ export const api = createApi({
     }),
 
     getCurrentResidences: build.query<Property[], string>({
-      queryFn: async (cognitoId) => {
+      queryFn: async (cognitoId, api, extraOptions, baseQuery) => {
         if (USE_MOCK_DATA) {
           await mockDelay();
           // Mock current residences - properties where tenant has active lease
@@ -279,13 +274,17 @@ export const api = createApi({
         
         // Real API call - use tenant properties from their profile
         console.log(`🏘️ Fetching current residences for tenant:`, cognitoId);
-        return { 
+        const result = await baseQuery({
           url: `api/tenants/${cognitoId}`,
-          transformResponse: (response: any) => {
-            console.log(`🏘️ Tenant properties response:`, response.properties);
-            return response.properties || [];
-          }
-        };
+        });
+        
+        if (result.error) {
+          return { error: result.error };
+        }
+        
+        const response = result.data as any;
+        console.log(`🏘️ Tenant properties response:`, response.properties);
+        return { data: response.properties || [] };
       },
       providesTags: (result) =>
         result
@@ -297,7 +296,7 @@ export const api = createApi({
     }),
 
     updateTenantSettings: build.mutation<Tenant, { cognitoId: string } & Partial<Tenant>>({
-      queryFn: async ({ cognitoId, ...updatedTenant }) => {
+      queryFn: async ({ cognitoId, ...updatedTenant }, api, extraOptions, baseQuery) => {
         if (USE_MOCK_DATA) {
           await mockDelay();
           // Mock update - in real app this would update the database
@@ -310,11 +309,17 @@ export const api = createApi({
         
         // Real API call
         console.log(`✏️ Updating tenant settings for:`, cognitoId, updatedTenant);
-        return {
+        const result = await baseQuery({
           url: `api/tenants/${cognitoId}`,
           method: "PUT",
           body: updatedTenant,
-        };
+        });
+        
+        if (result.error) {
+          return { error: result.error };
+        }
+        
+        return { data: result.data as Tenant };
       },
       invalidatesTags: (result) => [{ type: "Tenants", id: result?.id }],
       async onQueryStarted(_, { queryFulfilled }) {
@@ -326,7 +331,7 @@ export const api = createApi({
     }),
 
     addFavoriteProperty: build.mutation<Tenant, { cognitoId: string; propertyId: number }>({
-      queryFn: async ({ cognitoId, propertyId }) => {
+      queryFn: async ({ cognitoId, propertyId }, api, extraOptions, baseQuery) => {
         if (USE_MOCK_DATA) {
           await mockDelay();
           const tenant = mockTenants.find(t => t.cognitoId === cognitoId);
@@ -338,10 +343,16 @@ export const api = createApi({
         
         // Real API call
         console.log(`❤️ Adding favorite property ${propertyId} for tenant:`, cognitoId);
-        return {
+        const result = await baseQuery({
           url: `api/tenants/${cognitoId}/favorites/${propertyId}`,
           method: "POST",
-        };
+        });
+        
+        if (result.error) {
+          return { error: result.error };
+        }
+        
+        return { data: result.data as Tenant };
       },
       invalidatesTags: (result) => [
         { type: "Tenants", id: result?.id },
@@ -356,7 +367,7 @@ export const api = createApi({
     }),
 
     removeFavoriteProperty: build.mutation<Tenant, { cognitoId: string; propertyId: number }>({
-      queryFn: async ({ cognitoId, propertyId }) => {
+      queryFn: async ({ cognitoId, propertyId }, api, extraOptions, baseQuery) => {
         if (USE_MOCK_DATA) {
           await mockDelay();
           const tenant = mockTenants.find(t => t.cognitoId === cognitoId);
@@ -367,10 +378,16 @@ export const api = createApi({
         
         // Real API call
         console.log(`💔 Removing favorite property ${propertyId} for tenant:`, cognitoId);
-        return {
+        const result = await baseQuery({
           url: `api/tenants/${cognitoId}/favorites/${propertyId}`,
           method: "DELETE",
-        };
+        });
+        
+        if (result.error) {
+          return { error: result.error };
+        }
+        
+        return { data: result.data as Tenant };
       },
       invalidatesTags: (result) => [
         { type: "Tenants", id: result?.id },

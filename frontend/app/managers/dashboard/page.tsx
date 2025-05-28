@@ -8,6 +8,7 @@ import {
   mockUsers,
 } from "@/lib/mock-users";
 import { properties } from "@/lib/mock-data";
+import type { MockManagedProperties } from "@/types";
 import { Building, FileText, Plus, Users, DollarSign, TrendingUp, Clock, CheckCircle, Calendar } from "lucide-react";
 import Link from "next/link";
 
@@ -17,7 +18,7 @@ export default function ManagerDashboard() {
     mockUsers.find((u) => u.role === "manager")?.id || "user-002";
 
   // Get manager's properties
-  const propertyIds = mockManagedProperties[currentUser] || [];
+  const propertyIds = (mockManagedProperties as MockManagedProperties)[currentUser] || [];
   const managedProperties = properties.filter((prop) =>
     propertyIds.includes(prop.id)
   );
@@ -169,7 +170,7 @@ export default function ManagerDashboard() {
                       </div>
                       <div className="text-right">
                         <div className="text-sm text-gray-900 capitalize">{app.status}</div>
-                        <div className="text-xs text-gray-500">{app.submittedAt}</div>
+                        <div className="text-xs text-gray-500">{app.appliedAt}</div>
                       </div>
                     </div>
                   ))

@@ -11,7 +11,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: [api.util.getRunningQueriesThunk.type],
+        ignoredActions: ["api/executeQuery/pending", "api/executeMutation/pending"],
       },
     }).concat(api.middleware),
 });

@@ -7,18 +7,19 @@ import DashboardLayout from "@/components/dashboard-layout"
 import { Button } from "@/components/ui/button"
 import { mockManagedProperties } from "@/lib/mock-users"
 import { properties } from "@/lib/mock-data"
+import type { Property, MockManagedProperties } from "@/types"
 import { Building, Plus } from "lucide-react"
 import Link from "next/link"
 import PropertyManagementCard from "@/components/property-management-card"
 
 export default function ManagerProperties() {
   const { currentUser } = useSelector((state: RootState) => state.auth)
-  const [managedProperties, setManagedProperties] = useState([])
+  const [managedProperties, setManagedProperties] = useState<Property[]>([])
 
   useEffect(() => {
     if (currentUser) {
       // Get manager's properties
-      const propertyIds = mockManagedProperties[currentUser] || []
+      const propertyIds = (mockManagedProperties as MockManagedProperties)[currentUser] || []
       const managerProperties = properties.filter((prop) => propertyIds.includes(prop.id))
       setManagedProperties(managerProperties)
     }

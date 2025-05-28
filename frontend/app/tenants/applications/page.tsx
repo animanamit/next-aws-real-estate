@@ -5,6 +5,7 @@ import { useSelector } from "react-redux"
 import type { RootState } from "@/lib/store"
 import DashboardLayout from "@/components/dashboard-layout"
 import { mockApplications } from "@/lib/mock-users"
+import type { Application } from "@/types"
 import { FileText, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
@@ -12,7 +13,7 @@ import ApplicationCard from "@/components/application-card"
 
 export default function TenantApplications() {
   const { currentUser } = useSelector((state: RootState) => state.auth)
-  const [applications, setApplications] = useState([])
+  const [applications, setApplications] = useState<Application[]>([])
 
   useEffect(() => {
     if (currentUser) {

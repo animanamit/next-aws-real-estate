@@ -63,7 +63,7 @@ export default function ContactWidget({ property }: ContactWidgetProps) {
       <ApplicationModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        propertyId={property.id}
+        propertyId={property.id.toString()}
         propertyTitle={property.title}
       />
     </>

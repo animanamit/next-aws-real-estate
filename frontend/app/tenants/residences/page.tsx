@@ -5,6 +5,7 @@ import { useSelector } from "react-redux"
 import type { RootState } from "@/lib/store"
 import DashboardLayout from "@/components/dashboard-layout"
 import { mockResidences } from "@/lib/mock-users"
+import type { Residence } from "@/types"
 import { Building, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
@@ -12,7 +13,7 @@ import ResidenceCard from "@/components/residence-card"
 
 export default function TenantResidences() {
   const { currentUser } = useSelector((state: RootState) => state.auth)
-  const [residences, setResidences] = useState([])
+  const [residences, setResidences] = useState<Residence[]>([])
 
   useEffect(() => {
     if (currentUser) {

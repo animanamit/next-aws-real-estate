@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import type { RootState } from "@/lib/store"
+import type { Application, MockManagedProperties } from "@/types"
 import DashboardLayout from "@/components/dashboard-layout"
 import { mockApplications, mockManagedProperties } from "@/lib/mock-users"
 import { FileText } from "lucide-react"
@@ -10,12 +11,12 @@ import ApplicationCard from "@/components/application-card"
 
 export default function ManagerApplications() {
   const { currentUser } = useSelector((state: RootState) => state.auth)
-  const [applications, setApplications] = useState([])
+  const [applications, setApplications] = useState<Application[]>([])
 
   useEffect(() => {
     if (currentUser) {
       // Get manager's properties
-      const propertyIds = mockManagedProperties[currentUser] || []
+      const propertyIds = (mockManagedProperties as MockManagedProperties)[currentUser] || []
 
       // Get applications for manager's properties
       const propertyApplications = mockApplications.filter((app) => propertyIds.includes(app.propertyId))

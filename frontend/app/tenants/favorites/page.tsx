@@ -7,6 +7,7 @@ import DashboardLayout from "@/components/dashboard-layout"
 import { Button } from "@/components/ui/button"
 import { mockFavorites } from "@/lib/mock-users"
 import { properties } from "@/lib/mock-data"
+import type { Property, MockFavorites } from "@/types"
 import { Heart, Search } from "lucide-react"
 import Link from "next/link"
 import PropertyCard from "@/components/property-card"
@@ -14,12 +15,12 @@ import PropertyCard from "@/components/property-card"
 export default function TenantFavorites() {
   const { currentUser } = useSelector((state: RootState) => state.auth)
   const dispatch = useDispatch()
-  const [favorites, setFavorites] = useState([])
+  const [favorites, setFavorites] = useState<Property[]>([])
 
   useEffect(() => {
     if (currentUser) {
       // Get tenant's favorites
-      const userFavorites = mockFavorites[currentUser] || []
+      const userFavorites = (mockFavorites as MockFavorites)[currentUser] || []
       const favoriteProperties = properties.filter((prop) => userFavorites.includes(prop.id))
       setFavorites(favoriteProperties)
     }
